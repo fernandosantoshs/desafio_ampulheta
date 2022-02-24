@@ -12,7 +12,12 @@ function ampulheta(size){
     }
 
     for(let i = 0; i < size; i++ ){
-        
+        for ( let j = 0; j < size; j++){
+            if ( j < size - 1){
+                ampulheta += matriz[i][j]
+            }
+        }
+        ampulheta += "\n"
     }
 
     return ampulheta
