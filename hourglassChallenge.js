@@ -1,22 +1,52 @@
 // Desafio ampulheta Mobix - Fernando Santos
-
 let hourglass = []
-const hashtag = "#", space = "\n";
+const hashtag = "#", breakLine = "\n", space = " ";
 
 function fillHourglass(size) {
-
-  for (let row = 0; row < size; row++) {
-    hourglass.push(hashtag);
-
-    for (let column = 0; column < size; column++) {
-      hourglass.push(hashtag)
+  const lastIndex = size - 1;
+    
+  for (let row = 0; row < size; row++) {    
+    for (let column = 0; column < lastIndex; column++) {
+      hourglass.push(hashtag)    
     }
-
-    hourglass.push(space)
+    hourglass.push(hashtag + breakLine)
   };
 
-  return hourglass.join('')
+  let linha = 0, coluna = 0;
+  
+  const ampulheta = hourglass.map( (item, index) => {    
+    if(index % size == 0 && index != 0){  
+      linha++
+      coluna = 0
+    }
+    
+    if ( !isBorder(linha,coluna, lastIndex) && !isSand(linha,coluna, lastIndex) ){
+      coluna++
+      return space
+    }   
+    coluna++
+    return item
+  });
 
+  return ampulheta.join('');
+
+};
+
+function isBorder(linha, coluna, lastIndex) {
+  if ( (linha == 0 || coluna == 0) || 
+  (linha == lastIndex || coluna == lastIndex ) ||
+  ( linha == coluna || coluna == lastIndex - linha )) {
+    return true
+  }
+  return false 
+};
+
+function isSand(linha, coluna, lastIndex) {  
+  if ( (linha > 0 && linha < lastIndex ) && 
+  (coluna >= linha + 1 && coluna <  lastIndex - linha) ) {
+    return true
+  }
+  return false
 }
 
 console.log(fillHourglass(20))
