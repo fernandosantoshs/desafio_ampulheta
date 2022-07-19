@@ -3,6 +3,8 @@ let hourglass = []
 const hashtag = "#", breakLine = "\n", space = " ";
 
 function fillHourglass(size) {
+  if (size < 10) { return 'Tamanho inválido, informe um número maior que 10' };
+
   const lastIndex = size - 1;
     
   for (let row = 0; row < size; row++) {    
@@ -15,12 +17,12 @@ function fillHourglass(size) {
   let linha = 0, coluna = 0;
   
   const ampulheta = hourglass.map( (item, index) => {    
-    if(index % size == 0 && index != 0){  
+    if(index % size == 0 && index != 0) {  
       linha++
       coluna = 0
     }
     
-    if ( !isBorder(linha,coluna, lastIndex) && !isSand(linha,coluna, lastIndex) ){
+    if ( !isBorder(linha,coluna, lastIndex) && !isSand(linha,coluna, lastIndex) ) {
       coluna++
       return space
     }   
@@ -47,6 +49,6 @@ function isSand(linha, coluna, lastIndex) {
     return true
   }
   return false
-}
-
+};
+//Inserir o tamanho da ampulheta no parâmetro
 console.log(fillHourglass(20))
